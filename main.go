@@ -61,7 +61,7 @@ func main() {
 	var num int
 	_, err := fmt.Scanln(&num)
 	if err != nil {
-		fmt.Println("Error al leer el numero: ", err)
+		fmt.Println(err)
 		return
 	}
 
@@ -73,7 +73,7 @@ func main() {
 	}else if num == 3 {
 		hora()
 	}else if num == 0 {
-		fmt.Println("Saliendo...")
+		fmt.Println("Exit...")
 		return
 	}
 }
