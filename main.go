@@ -11,49 +11,32 @@ func menu() {
 	fmt.Print("0: Exit\n")
 }
 
-func seg() {
-	fmt.Print("How much do you want to change from seconds to ticks?\n")
-
-	var seg int
-	_, err := fmt.Scanln(&seg)
+func calc(fn func(float64) float64) {
+	fmt.Print("\033[3;J\033[H\033[2J")
+	fmt.Println("Insert number")
+	var num float64
+	_, err := fmt.Scanln(&num)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	result := seg * 20
+	result := fn(num)
+	fmt.Print("\033[3;J\033[H\033[2J")
 	fmt.Print(result, "\n")
 	main()
 }
 
-func min() {
-	fmt.Print("How much do you want to change from seconds to ticks: \n")
-	
-	var min int
-	_, err := fmt.Scanln(&min)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-			
-	result := min * 1200
-	fmt.Print(result, "\n")
-	main()
+func seg(a float64) float64 {
+	return a * 20
 }
 
-func hora() {
-	fmt.Print("How much do you want to change from hours to ticks: \n")
+func min(a float64) float64 {
+	return a * 1200
+}
 
-	var hora int
-	_, err := fmt.Scanln(&hora)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-
-	result := hora * 72000
-	fmt.Print(result, "\n")
-	main()
+func hora(a float64) float64 {
+	return a * 72000
 }
 
 func main() {
@@ -65,14 +48,13 @@ func main() {
 		return
 	}
 
-
 	if num == 1 {
-		seg()
-	}else if num == 2 {
-		min()
-	}else if num == 3 {
-		hora()
-	}else if num == 0 {
+		calc(seg)
+	} else if num == 2 {
+		calc(min)
+	} else if num == 3 {
+		calc(hora)
+	} else if num == 0 {
 		fmt.Println("Exit...")
 		return
 	}
