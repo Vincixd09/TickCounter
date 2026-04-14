@@ -7,7 +7,10 @@ import (
 func menu() {
 	fmt.Print("1: Change of Seconds by ticks\n")
 	fmt.Print("2: Chanve of Minute by ticks\n")
-	fmt.Print("3: Change of Horas by ticks\n")
+	fmt.Print("3: Change of Hours by ticks\n")
+	fmt.Print("4: Change of Ticks by Seconds\n")
+	fmt.Print("5: Change of Ticks by Minute\n")
+	fmt.Print("6: Change of Ticks by Hours\n")
 	fmt.Print("0: Exit\n")
 }
 
@@ -27,18 +30,6 @@ func calc(fn func(float64) float64) {
 	main()
 }
 
-func seg(a float64) float64 {
-	return a * 20
-}
-
-func min(a float64) float64 {
-	return a * 1200
-}
-
-func hora(a float64) float64 {
-	return a * 72000
-}
-
 func main() {
 	menu()
 	var num int
@@ -47,14 +38,21 @@ func main() {
 		fmt.Println(err)
 		return
 	}
-
-	if num == 1 {
-		calc(seg)
-	} else if num == 2 {
-		calc(min)
-	} else if num == 3 {
-		calc(hora)
-	} else if num == 0 {
+	switch num {
+	case 1:
+		calc(func(f float64) float64 { return f * 20 })
+	case 2:
+		calc(func(f float64) float64 { return f * 1200 })
+	case 3:
+		calc(func(f float64) float64 { return f * 72000 })
+	case 4:
+		calc(func(f float64) float64 {return f / 20})
+	case 5:
+		calc(func(f float64) float64 {return f / 1200})
+	case 6:
+		calc(func(f float64) float64 {return f / 72000})
+	case 0:
+		fmt.Print("\033[3;J\033[H\033[2J")
 		fmt.Println("Exit...")
 		return
 	}
